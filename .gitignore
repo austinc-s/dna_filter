@@ -1,0 +1,6 @@
+.vscode/
+
+*.csv
+*.o
+
+dna_filter

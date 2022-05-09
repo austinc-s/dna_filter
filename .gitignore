@@ -1,4 +1,7 @@
 .vscode/
+ks_files/
+unmicst/
+trimmed/
 
 *.csv
 *.o

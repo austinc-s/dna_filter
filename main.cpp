@@ -24,11 +24,13 @@ int main(int argc, char **argv){
     //read unmicst file
     //note that the first line is just headings
     list <string> unmicstFile;
+    cout << "Reading " << unmicstfilename << std::endl;
     int unmicstFileLength = readFileLines(unmicstfilename, unmicstFile);
 
     //read Kenichi's file
     //note that the first line is just headings
     list <string> kenichiFile;
+    cout << "Reading " << infilename << std::endl;
     int kenichiFileLength = readFileLines(infilename, kenichiFile);
 
     //check that they are the same length
@@ -39,12 +41,15 @@ int main(int argc, char **argv){
 
     //parse Kenichi's file into fields
     CL::Sample sample = CL::Sample();
+    cout << "Parsing...\n";
     sample.parseFields(kenichiFile);
 
     //remove lines where strictType is NA
+    cout << "Trimming...\n";
     trimCells(sample, unmicstFile);
 
     //write the unmicst file which now excludes the dropped cells
+    cout << "Writing...\n";
     writeFileLines(ofilename, unmicstFile);
 
     cout << "Trimmed: " << infilename << "\nOutput in: " << ofilename << "\n\n";
@@ -80,6 +85,7 @@ void trimCells(CL::Sample &sample, list <string> &lineList){
     list<string>::iterator it1;
     for(int i = 0; i < sample.getCells().size(); i++){
         it1 = lineList.begin();
+        if(i%50000 == 0){ cout << "Trimming...\n";}
         if(sample.getCells().at(i)->strictType.compare("NA") == 0){
             advance(it1, (i-removed));
             lineList.erase(it1);

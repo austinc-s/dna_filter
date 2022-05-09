@@ -47,6 +47,8 @@ int main(int argc, char **argv){
     //write the unmicst file which now excludes the dropped cells
     writeFileLines(ofilename, unmicstFile);
 
+    cout << "Trimmed: " << infilename << "\nOutput in: " << ofilename << "\n\n";
+
     return 0;
 }
 
